@@ -2,7 +2,6 @@
     <!-- Brand / Logo -->
     <div class="h-16 flex items-center justify-center border-b border-gray-200">
         <div class="flex items-center gap-2 text-pink-600 font-bold text-xl">
-            <!-- Icone de Doce (Candy) -->
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                 stroke="currentColor" class="w-8 h-8">
                 <path stroke-linecap="round" stroke-linejoin="round"
@@ -101,14 +100,14 @@
     <div class="border-t border-gray-200 p-4">
         <ul class="space-y-1">
             <li>
-                <a href="#"
-                    class="flex items-center gap-3 px-2 py-2 text-gray-700 hover:bg-pink-50 hover:text-pink-600 rounded-md transition-colors duration-200">
+                <a href="{{ route('users.index') }}"
+                    class="flex items-center gap-3 px-2 py-2 {{ request()->routeIs('users.*') ? 'bg-pink-50 text-pink-600' : 'text-gray-700 hover:bg-pink-50 hover:text-pink-600' }} rounded-md transition-colors duration-200">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-5 h-5">
                         <path stroke-linecap="round" stroke-linejoin="round"
                             d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
                     </svg>
-                    <span>Perfil / Usuários</span>
+                    <span>Usuários</span>
                 </a>
             </li>
             <li>

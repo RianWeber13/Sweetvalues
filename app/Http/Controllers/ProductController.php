@@ -65,6 +65,15 @@ class ProductController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     */
+    public function show(Product $product)
+    {
+        $product->load(['recipes', 'overheadCosts']);
+        return view('products.show', compact('product'));
+    }
+
+    /**
      * Show the form for editing the specified resource.
      */
     public function edit(Product $product)

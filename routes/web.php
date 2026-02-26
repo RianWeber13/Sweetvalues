@@ -35,4 +35,5 @@ Route::middleware('auth')->group(function () {
     Route::resource('products', App\Http\Controllers\ProductController::class);
     Route::resource('overhead_costs', App\Http\Controllers\OverheadCostController::class);
     Route::resource('recipes', App\Http\Controllers\RecipeController::class);
+    Route::resource('users', App\Http\Controllers\UserController::class)->except(['show']);
 });

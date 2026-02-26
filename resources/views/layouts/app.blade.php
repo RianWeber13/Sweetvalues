@@ -5,10 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sweet Values - Gestão de Precificação</title>
+    <link rel="icon" type="image/x-icon" href="{{ asset('logo.ico') }}">
 
     <!-- Option 1: Using Vite (Recommended for production/development if npm run dev is running) -->
     <!-- Option 1: Using Vite (Commented out because npm is not installed) -->
-    {{-- @vite(['resources/css/app.css', 'resources/js/app.js']) --}}
+     @vite(['resources/css/app.css', 'resources/js/app.js']) 
 
     <!-- Option 2: CDN Backstop (In case user isn't running npm run dev) -->
     <!-- Remove this if you strictly use Vite -->
@@ -94,6 +95,13 @@
             <div class="bg-green-100 border-l-4 border-green-500 text-green-700 p-4 mb-6 rounded shadow-sm"
                 role="alert">
                 <p>{{ session('success') }}</p>
+            </div>
+            @endif
+
+            @if(session('error'))
+            <div class="bg-red-100 border-l-4 border-red-500 text-red-700 p-4 mb-6 rounded shadow-sm"
+                role="alert">
+                <p>{{ session('error') }}</p>
             </div>
             @endif
 

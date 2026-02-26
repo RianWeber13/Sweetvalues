@@ -12,24 +12,26 @@
                 class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-500">
         </div>
 
-        <div class="mb-4">
-            <label class="block text-gray-700 font-bold mb-2">Unidade de Medida:</label>
-            <select name="unit" required
-                class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-500 bg-white">
-                <option value="g">g (Gramas)</option>
-                <option value="ml">ml (Mililitros)</option>
-            </select>
+        <div class="grid grid-cols-2 gap-4 mb-6">
+            <div>
+                <label class="block text-gray-700 font-bold mb-2">Quantidade de Ingrediente:</label>
+                <input type="number" name="package_size" step="1" placeholder="Ex: 395" required
+                    class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-500">
+            </div>
+            <div>
+                <label class="block text-gray-700 font-bold mb-2">Unidade de Medida:</label>
+                <select name="unit" required
+                    class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-500 bg-white">
+                    <option value="g">g (Gramas)</option>
+                    <option value="ml">ml (Mililitros)</option>
+                    <option value="un">un (Unidade)</option>
+                </select>
+            </div>
         </div>
 
         <div class="mb-4">
             <label class="block text-gray-700 font-bold mb-2">Preço de Compra (R$):</label>
-            <input type="number" name="purchase_price" step="0.01" placeholder="0.00" required
-                class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-500">
-        </div>
-
-        <div class="mb-6">
-            <label class="block text-gray-700 font-bold mb-2">Tamanho da Embalagem:</label>
-            <input type="number" name="package_size" step="0.01" placeholder="Ex: 395" required
+            <input type="text" name="purchase_price" step="0.01" placeholder="00,00" oninput="formatarMoeda(this)" required
                 class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-500">
         </div>
 

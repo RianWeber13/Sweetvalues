@@ -15,7 +15,7 @@
             <tr>
                 <th class="p-3 border border-pink-700">Nome</th>
                 <th class="p-3 border border-pink-700">Preço Compra</th>
-                <th class="p-3 border border-pink-700">Tamanho</th>
+                <th class="p-3 border border-pink-700">Quantidade</th>
                 <th class="p-3 border border-pink-700">Custo por grama</th>
                 <th class="p-3 border border-pink-700">Ações</th>
             </tr>

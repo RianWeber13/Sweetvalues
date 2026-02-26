@@ -52,8 +52,7 @@
                                     <p class="text-gray-900 whitespace-no-wrap">{{ $recipe->name }}</p>
                                 </td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <p class="text-gray-900 whitespace-no-wrap">{{ $recipe->yield_quantity }} {{
-                                        $recipe->yield_unit }}</p>
+                                    <p class="text-gray-900 whitespace-no-wrap">{{ $recipe->yield_quantity }}</p>
                                 </td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
                                     <p class="text-gray-900 whitespace-no-wrap font-bold text-green-600">
@@ -62,16 +61,20 @@
                                     <div class="text-xs text-gray-500 mt-1">
                                         @foreach($recipe->ingredients as $ingredient)
                                         <div>
-                                            {{ $ingredient->pivot->quantity_used }} {{ $ingredient->unit }} de {{
-                                            $ingredient->name }}
-                                            (R$ {{ number_format($ingredient->unit_cost *
-                                            $ingredient->pivot->quantity_used, 2, ',', '.') }})
+                                            {{ $ingredient->pivot->quantity_used }} {{ $ingredient->unit }} de {{ $ingredient->name }}
+                                            (R$ {{ number_format($ingredient->unit_cost * $ingredient->pivot->quantity_used, 2, ',', '.') }})
+                                        </div>
+                                        @endforeach
+                                        @foreach($recipe->overheadCosts as $cost)
+                                        <div class="text-gray-400">
+                                            {{ $cost->name }}:
+                                            {{ $cost->type === 'fixed' ? 'R$ ' . number_format($cost->value, 2, ',', '.') : $cost->value . '%' }}
                                         </div>
                                         @endforeach
                                     </div>
                                 </td>
                                 <td class="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900 mr-3">Editar</a>
+                                    <a href="{{ route('recipes.edit', $recipe->id) }}" class="text-indigo-600 hover:text-indigo-900 mr-3">Editar</a>
                                 </td>
                             </tr>
                             @empty
