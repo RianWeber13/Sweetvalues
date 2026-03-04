@@ -9,6 +9,9 @@ php artisan view:cache
 echo "==> Rodando migrations..."
 php artisan migrate --force
 
+echo "==> Criando usuário admin (se necessário)..."
+php artisan db:seed --class=AdminUserSeeder --force
+
 echo "==> Corrigindo permissões..."
 chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
 

@@ -59,6 +59,12 @@ services:
         value: noreply@sweetvalues.com
       - key: MAIL_FROM_NAME
         value: Sweet Values
+      - key: ADMIN_NAME
+        value: Admin
+      - key: ADMIN_EMAIL
+        sync: false
+      - key: ADMIN_PASSWORD
+        sync: false
 
 databases:
   - name: sweetvalues-db
