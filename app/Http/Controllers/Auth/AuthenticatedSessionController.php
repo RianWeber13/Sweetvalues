@@ -39,7 +39,16 @@ class AuthenticatedSessionController extends Controller
         $user = Auth::getProvider()->retrieveByCredentials($credentials);
 
         $user->generateTwoFactorCode();
-        Mail::to($user->email)->send(new TwoFactorCode($user));
+
+        try {
+            Mail::to($user->email)->send(new TwoFactorCode($user));
+        } catch (\Exception $e) {
+            \Log::error('2FA email failed: ' . $e->getMessage());
+            $user->clearTwoFactorCode();
+            throw ValidationException::withMessages([
+                'email' => 'Falha ao enviar o código por e-mail. Tente novamente em alguns instantes.',
+            ]);
+        }
 
         $request->session()->put('auth.2fa_pending_user_id', $user->id);
 
