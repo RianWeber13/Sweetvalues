@@ -30,6 +30,21 @@
                                 @enderror
                             </div>
 
+                            <!-- Category -->
+                            <div class="mb-4">
+                                <label for="category" class="block text-gray-700 font-bold mb-2">Categoria</label>
+                                <select id="category" name="category"
+                                    class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-pink-500">
+                                    <option value="">Sem categoria</option>
+                                    @foreach($categories as $cat)
+                                    <option value="{{ $cat }}" {{ old('category', $product->category) === $cat ? 'selected' : '' }}>{{ $cat }}</option>
+                                    @endforeach
+                                </select>
+                                @error('category')
+                                <p class="text-red-500 text-xs mt-2">{{ $message }}</p>
+                                @enderror
+                            </div>
+
                             <!-- Recipes Selection -->
                             <div class="mt-6">
                                 <h3 class="text-lg font-medium text-gray-900 border-b pb-2 mb-4">Receitas utilizadas

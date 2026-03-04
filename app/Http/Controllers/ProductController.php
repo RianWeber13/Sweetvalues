@@ -10,13 +10,34 @@ use App\Models\OverheadCost;
 
 class ProductController extends Controller
 {
+    public const CATEGORIES = [
+        'Cookies',
+        'Salgados',
+        'Doces de Festa',
+        'Sobremesas',
+        'Bolos',
+    ];
+
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::with(['recipes', 'overheadCosts'])->get();
-        return view('products.index', compact('products'));
+        $category = $request->query('category');
+
+        if ($category) {
+            $products = Product::with(['recipes', 'overheadCosts'])
+                ->where('category', $category)
+                ->get();
+        } else {
+            $products = collect();
+        }
+
+        return view('products.index', [
+            'products'   => $products,
+            'categories' => self::CATEGORIES,
+            'category'   => $category,
+        ]);
     }
 
     /**
@@ -26,7 +47,8 @@ class ProductController extends Controller
     {
         $recipes = Recipe::all();
         $overheadCosts = OverheadCost::all();
-        return view('products.create', compact('recipes', 'overheadCosts'));
+        $categories = self::CATEGORIES;
+        return view('products.create', compact('recipes', 'overheadCosts', 'categories'));
     }
 
     /**
@@ -35,17 +57,19 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'name'          => 'required|string|max:255',
+            'category'      => 'nullable|string|in:' . implode(',', self::CATEGORIES),
             'profit_margin' => 'required|numeric|min:0',
-            'recipes' => 'array',
-            'recipes.*.id' => 'required|exists:recipes,id',
+            'recipes'       => 'array',
+            'recipes.*.id'       => 'required|exists:recipes,id',
             'recipes.*.quantity' => 'required|numeric|min:0.01',
-            'overhead_costs' => 'array',
+            'overhead_costs'   => 'array',
             'overhead_costs.*' => 'exists:overhead_costs,id',
         ]);
 
         $product = Product::create([
-            'name' => $validated['name'],
+            'name'          => $validated['name'],
+            'category'      => $validated['category'] ?? null,
             'profit_margin' => $validated['profit_margin'],
         ]);
 
@@ -80,9 +104,10 @@ class ProductController extends Controller
     {
         $recipes = Recipe::all();
         $overheadCosts = OverheadCost::all();
+        $categories = self::CATEGORIES;
         $product->load(['recipes', 'overheadCosts']);
 
-        return view('products.edit', compact('product', 'recipes', 'overheadCosts'));
+        return view('products.edit', compact('product', 'recipes', 'overheadCosts', 'categories'));
     }
 
     /**
@@ -91,17 +116,19 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255',
+            'name'          => 'required|string|max:255',
+            'category'      => 'nullable|string|in:' . implode(',', self::CATEGORIES),
             'profit_margin' => 'required|numeric|min:0',
-            'recipes' => 'array',
-            'recipes.*.id' => 'required|exists:recipes,id',
+            'recipes'       => 'array',
+            'recipes.*.id'       => 'required|exists:recipes,id',
             'recipes.*.quantity' => 'required|numeric|min:0.01',
-            'overhead_costs' => 'array',
+            'overhead_costs'   => 'array',
             'overhead_costs.*' => 'exists:overhead_costs,id',
         ]);
 
         $product->update([
-            'name' => $validated['name'],
+            'name'          => $validated['name'],
+            'category'      => $validated['category'] ?? null,
             'profit_margin' => $validated['profit_margin'],
         ]);
 
