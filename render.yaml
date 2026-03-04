@@ -46,9 +46,15 @@ services:
       - key: QUEUE_CONNECTION
         value: database
       - key: MAIL_MAILER
-        value: log
-      - key: LOG_CHANNEL
-        value: stderr
+        value: smtp
+      - key: MAIL_HOST
+        value: sandbox.smtp.mailtrap.io
+      - key: MAIL_PORT
+        value: "2525"
+      - key: MAIL_USERNAME
+        value: 4f778312ff0a64
+      - key: MAIL_PASSWORD
+        value: 75bd9a47d10139
       - key: MAIL_FROM_ADDRESS
         value: noreply@sweetvalues.com
       - key: MAIL_FROM_NAME
