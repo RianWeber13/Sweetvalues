@@ -59,6 +59,6 @@ class TwoFactorController extends Controller
         Auth::login($user, $remember);
         $request->session()->regenerate();
 
-        return redirect()->intended(route('ingredients.index'));
+        return redirect()->intended(route('dashboard'));
     }
 }

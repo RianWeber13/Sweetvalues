@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\TwoFactorController;
+use App\Http\Controllers\DashboardController;
 
 /*
  |--------------------------------------------------------------------------
@@ -38,6 +39,7 @@ Route::post('logout', [AuthenticatedSessionController::class , 'destroy'])
 
 // Protected Routes
 Route::middleware('auth')->group(function () {
+    Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::resource('ingredients', IngredientController::class);
     Route::resource('products', App\Http\Controllers\ProductController::class);
     Route::resource('overhead_costs', App\Http\Controllers\OverheadCostController::class);

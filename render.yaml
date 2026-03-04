@@ -1,0 +1,65 @@
+services:
+  - type: web
+    name: sweetvalues
+    env: docker
+    plan: free
+    healthCheckPath: /up
+    envVars:
+      - key: APP_NAME
+        value: SweetValues
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: false
+      - key: APP_KEY
+        generateValue: true
+      - key: APP_URL
+        value: https://sweetvalues.onrender.com  # substituir pelo seu URL real
+      - key: DB_CONNECTION
+        value: pgsql
+      - key: DB_HOST
+        fromDatabase:
+          name: sweetvalues-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: sweetvalues-db
+          property: port
+      - key: DB_DATABASE
+        fromDatabase:
+          name: sweetvalues-db
+          property: database
+      - key: DB_USERNAME
+        fromDatabase:
+          name: sweetvalues-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: sweetvalues-db
+          property: password
+      - key: SESSION_DRIVER
+        value: database
+      - key: CACHE_STORE
+        value: database
+      - key: QUEUE_CONNECTION
+        value: database
+      - key: MAIL_MAILER
+        value: smtp
+      - key: MAIL_HOST
+        value: sandbox.smtp.mailtrap.io
+      - key: MAIL_PORT
+        value: 2525
+      - key: MAIL_USERNAME
+        value: 4f778312ff0a64
+      - key: MAIL_PASSWORD
+        value: 75bd9a47d10139
+      - key: MAIL_FROM_ADDRESS
+        value: noreply@sweetvalues.com
+      - key: MAIL_FROM_NAME
+        value: Sweet Values
+
+databases:
+  - name: sweetvalues-db
+    plan: free
+    databaseName: sweet_values_db
+    user: svadmin
