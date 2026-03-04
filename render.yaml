@@ -37,6 +37,8 @@ services:
         fromDatabase:
           name: sweetvalues-db
           property: password
+      - key: DB_SSLMODE
+        value: require
       - key: SESSION_DRIVER
         value: database
       - key: CACHE_STORE
